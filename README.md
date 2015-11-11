@@ -24,6 +24,10 @@ Injection :
 
 - [Butterknife](http://jakewharton.github.io/butterknife/)
 
+List and Recycler adapter :
+
+- [EasyRecyclerAdapter](https://github.com/ribot/easy-adapter)
+
 ## Tests
 
 Unit Tests :
