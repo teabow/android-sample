@@ -12,6 +12,12 @@
 bin/
 gen/
 
+# Android Studio
+*.iml
+
+## Directory-based project format:
+.idea/
+
 # Gradle files
 .gradle/
 build/
