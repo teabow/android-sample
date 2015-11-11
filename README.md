@@ -4,6 +4,10 @@ Android sample project
 
 This project is a sample Android application using the following stack :
 
+## Async tasks
+
+- [RxAndroid] (https://github.com/ReactiveX/RxAndroid)
+
 ## Networking
 
 HTTP Client :
