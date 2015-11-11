@@ -1,23 +1,24 @@
 # android-sample
+
 Android sample project
 
 This project is a sample Android application using the following stack :
 
 ## Networking
 
-Requêtes HTTP :
+HTTP Client :
 
 - [Retrofit](https://github.com/square/retrofit)
 
-Téléchargement et cache d'images :
+Images downloading and caching :
 
 - [Picasso](http://square.github.io/picasso/)
 
-Parsing JSON :
+JSON parsing :
 
 - [Gson](https://code.google.com/p/google-gson/)
 
-## Vues
+## Views
 
 Injection :
 
@@ -25,6 +26,6 @@ Injection :
 
 ## Tests
 
-Tests unitaires :
+Unit Tests :
 
 - [Robolectric](http://robolectric.org/)
