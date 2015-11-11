@@ -8,7 +8,7 @@
 
 ### Dependency injection
 
-- Dagger 2
+- [Dagger 2](http://google.github.io/dagger/)
 
 ### Async tasks
 
