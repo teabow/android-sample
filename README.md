@@ -1,10 +1,12 @@
-# android-sample
+# Android sample project
 
-Android sample project
+## ARCHITECTURE
 
-This project is a sample Android application using the following stack :
+![architecture](doc/architecture/architecture.png)
 
-## Networking
+## STACK
+
+### Networking
 
 HTTP Client :
 
@@ -18,7 +20,7 @@ JSON parsing :
 
 - [Gson](https://code.google.com/p/google-gson/)
 
-## Views
+### Views
 
 Injection :
 
@@ -28,8 +30,9 @@ List and Recycler adapter :
 
 - [EasyRecyclerAdapter](https://github.com/ribot/easy-adapter)
 
-## Tests
+### Tests
 
 Unit Tests :
 
 - [Robolectric](http://robolectric.org/)
+
