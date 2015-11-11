@@ -16,6 +16,7 @@ import com.app.sample.sampleapp.presenter.RecyclerViewPresenter;
 import com.app.sample.sampleapp.ui.BaseActivity;
 import com.app.sample.sampleapp.ui.adapter.RepoItemHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -78,6 +79,13 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
         reposRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerAdapter = new EasyRecyclerAdapter<>(reposRecyclerView.getContext(), RepoItemHolder.class);
         reposRecyclerView.setAdapter(recyclerAdapter);
+        swipeRefreshLayout.setColorSchemeResources(R.color.primary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // TODO: handle refresh
+            }
+        });
         return this;
     }
 
