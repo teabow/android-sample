@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.app.sample.sampleapp.R;
+import com.app.sample.sampleapp.SampleApplication;
+import com.app.sample.sampleapp.injection.component.ApplicationComponent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
@@ -38,6 +40,7 @@ public abstract class BaseActivity extends RxAppCompatActivity
         if (enableBinding()) {
             ButterKnife.bind(this);
         }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -58,6 +61,10 @@ public abstract class BaseActivity extends RxAppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    protected ApplicationComponent applicationComponent() {
+        return SampleApplication.get(this).getComponent();
     }
 
     @Override

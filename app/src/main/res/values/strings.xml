@@ -10,4 +10,13 @@
 
     <string name="label_avatar">Avatar</string>
 
+    <!-- Dialogs -->
+    <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_delete">Delete</string>
+    <string name="dialog_action_cancel">Cancel</string>
+
+    <string name="dialog_error_title">Oops</string>
+    <string name="dialog_general_error_Message">There was an error making the request</string>
+    <string name="dialog_error_no_connection">Sorry, you need a connection to do that!</string>
+
 </resources>

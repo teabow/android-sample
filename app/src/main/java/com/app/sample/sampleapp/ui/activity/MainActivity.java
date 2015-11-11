@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.app.sample.sampleapp.R;
+import com.app.sample.sampleapp.SampleApplication;
 import com.app.sample.sampleapp.data.DataManager;
 import com.app.sample.sampleapp.model.Repo;
 import com.app.sample.sampleapp.presenter.PresenterRecyclerView;
@@ -39,6 +40,10 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
     @Bind(R.id.swipe_container)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    private boolean isRefreshing = false;
+
+    private RecyclerViewPresenter presenter;
+
     private EasyRecyclerAdapter<Repo> recyclerAdapter;
 
     private CompositeSubscription subscriptions;
@@ -57,12 +62,14 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        applicationComponent().inject(this);
+
         subscriptions = new CompositeSubscription();
 
-        RecyclerViewPresenter presenter = new RecyclerViewPresenter<Repo>(this, subscriptions) {
+        presenter = new RecyclerViewPresenter<Repo>(this, subscriptions) {
             @Override
             public Observable<List<Repo>> setObservable() {
-                return new DataManager(this.context).getMoviesService().getRepos("teabow");
+                return applicationComponent().dataManager().getMoviesService().getRepos("teabow");
             }
         };
         presenter.loadItems();
@@ -83,7 +90,8 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // TODO: handle refresh
+                isRefreshing = true;
+                presenter.loadItems();
             }
         });
         return this;
@@ -91,11 +99,15 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
 
     @Override
     public void onPresenterLoad() {
-        progressBar.setVisibility(View.VISIBLE);
+        if (!isRefreshing) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void onPresenterFinished(List<Repo> items) {
+        isRefreshing = false;
+        swipeRefreshLayout.setRefreshing(false);
         progressBar.setVisibility(View.GONE);
         recyclerAdapter.setItems(items);
     }
