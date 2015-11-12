@@ -9,16 +9,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.app.sample.sampleapp.R;
-import com.app.sample.sampleapp.SampleApplication;
-import com.app.sample.sampleapp.data.DataManager;
 import com.app.sample.sampleapp.model.Repo;
 import com.app.sample.sampleapp.presenter.PresenterRecyclerView;
 import com.app.sample.sampleapp.presenter.RecyclerViewPresenter;
 import com.app.sample.sampleapp.ui.BaseActivity;
 import com.app.sample.sampleapp.ui.adapter.RepoItemHolder;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 import butterknife.Bind;
 import rx.Observable;
