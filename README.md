@@ -6,6 +6,10 @@
 
 ## STACK
 
+### Dependency injection
+
+- [Dagger 2](http://google.github.io/dagger/)
+
 ### Async tasks
 
 - [RxAndroid] (https://github.com/ReactiveX/RxAndroid)
