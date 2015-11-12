@@ -15,7 +15,6 @@ public class PreferencesHelper {
 
     public static final String PREF_FILE_NAME = "sample_pref_file";
 
-    @Inject
     public PreferencesHelper(Context context) {
         preferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
     }

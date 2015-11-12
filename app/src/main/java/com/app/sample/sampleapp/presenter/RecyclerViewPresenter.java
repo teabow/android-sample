@@ -1,6 +1,5 @@
 package com.app.sample.sampleapp.presenter;
 
-import android.content.Context;
 import android.util.Log;
 import java.util.List;
 
@@ -16,8 +15,6 @@ import rx.subscriptions.CompositeSubscription;
  */
 public abstract class RecyclerViewPresenter<T> {
 
-    protected Context context;
-
     protected PresenterRecyclerView view;
 
     protected CompositeSubscription subscriptions;
@@ -25,7 +22,7 @@ public abstract class RecyclerViewPresenter<T> {
     public RecyclerViewPresenter(PresenterRecyclerView view, CompositeSubscription subscriptions) {
         this.subscriptions = subscriptions;
         this.view = view;
-        this.context = this.view.onPresenterInit();
+        this.view.onPresenterInit();
     }
 
     public abstract Observable<List<T>> setObservable();
@@ -46,8 +43,8 @@ public abstract class RecyclerViewPresenter<T> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(getClass().getCanonicalName(), "onError");
                         e.printStackTrace();
+                        view.onPresenterError();
                     }
 
                     @Override

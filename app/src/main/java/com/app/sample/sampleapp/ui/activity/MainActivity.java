@@ -9,14 +9,18 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.app.sample.sampleapp.R;
+import com.app.sample.sampleapp.data.DataManager;
 import com.app.sample.sampleapp.model.Repo;
 import com.app.sample.sampleapp.presenter.PresenterRecyclerView;
 import com.app.sample.sampleapp.presenter.RecyclerViewPresenter;
 import com.app.sample.sampleapp.ui.BaseActivity;
 import com.app.sample.sampleapp.ui.adapter.RepoItemHolder;
+import com.app.sample.sampleapp.ui.view.dialog.DialogFactory;
 
 import java.util.List;
 
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observable;
@@ -37,6 +41,9 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
 
     @Bind(R.id.swipe_container)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    @Inject
+    DataManager dataManager;
 
     private boolean isRefreshing = false;
 
@@ -67,10 +74,11 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
         presenter = new RecyclerViewPresenter<Repo>(this, subscriptions) {
             @Override
             public Observable<List<Repo>> setObservable() {
-                return applicationComponent().dataManager().getMoviesService().getRepos("teabow");
+                return dataManager.getMoviesService().getRepos("teabow");
             }
         };
         presenter.loadItems();
+        dataManager.getPreferencesHelper().storeStringValue("user", "teabow");
     }
 
     @Override
@@ -80,7 +88,7 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
     }
 
     @Override
-    public Context onPresenterInit() {
+    public void onPresenterInit() {
         reposRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerAdapter = new EasyRecyclerAdapter<>(reposRecyclerView.getContext(), RepoItemHolder.class);
         reposRecyclerView.setAdapter(recyclerAdapter);
@@ -92,7 +100,6 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
                 presenter.loadItems();
             }
         });
-        return this;
     }
 
     @Override
@@ -104,9 +111,19 @@ public class MainActivity extends BaseActivity implements PresenterRecyclerView<
 
     @Override
     public void onPresenterFinished(List<Repo> items) {
+        endLoading();
+        recyclerAdapter.setItems(items);
+    }
+
+    @Override
+    public void onPresenterError() {
+        endLoading();
+        DialogFactory.createSimpleErrorDialog(this).show();
+    }
+
+    private void endLoading() {
         isRefreshing = false;
         swipeRefreshLayout.setRefreshing(false);
         progressBar.setVisibility(View.GONE);
-        recyclerAdapter.setItems(items);
     }
 }

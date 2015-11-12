@@ -8,8 +8,10 @@ import android.content.Context;
  */
 public interface PresenterView {
 
-    Context onPresenterInit();
+    void onPresenterInit();
 
     void onPresenterLoad();
+
+    void onPresenterError();
 
 }

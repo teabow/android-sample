@@ -20,7 +20,8 @@ import javax.inject.Singleton;
 @Singleton
 public class DataManager {
 
-    private PreferencesHelper preferencesHelper;
+    @Inject
+    protected PreferencesHelper preferencesHelper;
 
     @Inject
     protected MoviesService moviesService;
